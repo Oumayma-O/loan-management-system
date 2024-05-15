@@ -1,12 +1,28 @@
 import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
 import { LoanManagementModule } from './loan-management/loan-management.module';
-import { SharedModule } from './shared/shared.module';
 
 @Module({
-  imports: [RabbitMQModule, LoanManagementModule, SharedModule],
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'LOAN_SERVICE',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'commercial',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'commercial-consumer',
+          },
+        },
+      },
+    ]),
+    LoanManagementModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

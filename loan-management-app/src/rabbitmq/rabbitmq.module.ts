@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     ClientsModule.register([
       {
-        name: 'RABBITMQ_SERVICE',
+        name: 'RMQ_CLIENT',
         transport: Transport.RMQ,
         options: {
           urls: ['amqp://localhost:5672'],
