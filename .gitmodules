@@ -1,0 +1,3 @@
+[submodule "commercial-service"]
+	path = commercial-service
+	url = https://github.com/Oumayma-O/loan-management-system
