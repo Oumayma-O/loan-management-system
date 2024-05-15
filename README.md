@@ -29,7 +29,7 @@ Additionally, RabbitMQ served as our messaging broker, providing reliable messag
 This module accepts client applications along with their associated documents and forwards them to a queue, where the Commercial service is listening.
 
 ![img_3.png](images/img_3.png)
-![img_2.png](images/img_2.png)
+![rabbitQueue.png](images/img_2.png)
 ### Commercial Service Module
 This module fetches applications from the loan application queue and transfers them to the commercial-ocr queue. This enables the OCR service to process the applications effectively.
 

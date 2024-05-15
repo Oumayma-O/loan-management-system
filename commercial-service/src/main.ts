@@ -1,23 +1,22 @@
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
-      transport: Transport.KAFKA,
+      transport: Transport.RMQ,
       options: {
-        client: {
-          brokers: ['localhost:9092'],
-        },
-        consumer: {
-          groupId: 'commercial-consumer',
+        urls: ['amqp://localhost:5672'],
+        queue: 'loan-application',
+        queueOptions: {
+          durable: true,
         },
       },
     },
   );
   await app.listen();
-  console.log('Commercial-service is running');
+  console.log('Commercial-service module is running');
 }
 bootstrap();

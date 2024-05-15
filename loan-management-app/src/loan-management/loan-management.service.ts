@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import { Inject, Injectable } from '@nestjs/common';
-import { DocumentDto, LoanApplicationDto } from './dto/loan-application.dto';
-import { ClientKafka } from '@nestjs/microservices';
-=======
 import { Injectable } from '@nestjs/common';
 import { DocumentDto, LoanApplicationDto } from './dto/loan-application.dto';
 import {
@@ -10,11 +5,20 @@ import {
   ClientProxyFactory,
   Transport,
 } from '@nestjs/microservices';
->>>>>>> refs/remotes/origin/main
 
 @Injectable()
 export class LoanManagementService {
-  constructor(@Inject('LOAN_SERVICE') private readonly client: ClientKafka) {}
+  private readonly client: ClientProxy;
+
+  constructor() {
+    this.client = ClientProxyFactory.create({
+      transport: Transport.RMQ,
+      options: {
+        urls: ['amqp://localhost:5672'],
+        queue: 'loan-application',
+      },
+    });
+  }
 
   async submitLoanApplication(
     loanApplication: LoanApplicationDto,
