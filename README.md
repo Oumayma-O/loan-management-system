@@ -10,7 +10,7 @@ Note that the commercial service and the risk management one should use some OCR
 
 ## Global Architecture :
 
-![tp4.jpg](..%2F..%2FDownloads%2Ftp4.jpg)
+![tp4.jpg](tp4.jpg)
 
 ## Implementation :
 
@@ -27,17 +27,17 @@ Additionally, RabbitMQ served as our messaging broker, providing reliable messag
 This module accepts client applications along with their associated documents and forwards them to a queue, where the Commercial service is listening.
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
-![e854e69f-b84d-432e-939e-e40bfc6463ce.jpg](..%2F..%2FDownloads%2Fe854e69f-b84d-432e-939e-e40bfc6463ce.jpg)
+![e854e69f-b84d-432e-939e-e40bfc6463ce.jpg](e854e69f-b84d-432e-939e-e40bfc6463ce.jpg)
 ### Commercial Service Module
 This module fetches applications from the loan application queue and transfers them to the commercial-ocr queue. This enables the OCR service to process the applications effectively.
 
 Additionally, it retrieves processed applications from the processed_files-commercial queue, calculates an initial score based on them, and stores this score in the scoring database.
 
-![x.jpg](..%2F..%2FDownloads%2Fx.jpg)
+![dbacb480-dffd-42fb-b428-e52afca41522.jpg](dbacb480-dffd-42fb-b428-e52afca41522.jpg)
+
 ### OCR Module
 
 This module fetches applications from the ocr-queue, extracts information from the documents, and places the results in the processed_files-commercial queue.
 
-![185f836f-edb8-4f67-b9ab-f1cac8c906ff.jpg](..%2F..%2FDownloads%2F185f836f-edb8-4f67-b9ab-f1cac8c906ff.jpg)
-
+![185f836f-edb8-4f67-b9ab-f1cac8c906ff.jpg](185f836f-edb8-4f67-b9ab-f1cac8c906ff.jpg)
 
