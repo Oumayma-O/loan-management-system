@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { LoanApplicationFullDto } from './shared/loan-application-full.dto';
 import {
   ClientProxy,
@@ -9,6 +9,7 @@ import {
 @Injectable()
 export class AppService {
   private readonly client: ClientProxy;
+  private readonly client2: ClientProxy;
 
   constructor() {
     this.client = ClientProxyFactory.create({
@@ -16,6 +17,13 @@ export class AppService {
       options: {
         urls: ['amqp://localhost:5672'],
         queue: 'commercial-ocr',
+      },
+    });
+    this.client2 = ClientProxyFactory.create({
+      transport: Transport.RMQ,
+      options: {
+        urls: ['amqp://localhost:5672'],
+        queue: 'risk_management-commercial',
       },
     });
   }
@@ -27,9 +35,6 @@ export class AppService {
       `Received a new loan application - customer : ${application.fullName}`,
     );
     console.log('Application:', application);
-    console.log('Loan application docs:', application.documents);
-
-
     try {
       await this.client
         .emit('commercial-ocr', application.documents)
@@ -40,6 +45,12 @@ export class AppService {
         'Failed to send loan application to commercial-ocr queue:',
         error,
       );
+    }
+    try {
+      await this.client2.emit('commercial-ocr', 'initial-score').toPromise();
+      console.log('initial score sent to risk service.');
+    } catch (error) {
+      console.error('Failed to send initial score to risk service:', error);
     }
   }
 }
