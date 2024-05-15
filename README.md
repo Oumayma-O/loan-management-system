@@ -1,5 +1,7 @@
 # Loan Application
 ## Reactive Microservices Architecture
+By : **Mohamed Lasswed** - **Oumayma Ouerfelli**
+
 The INSATx team has been asked to build a loan management module of an existing banking application in order to automate the following steps of a loan process:
 
 The client fills in the application form and uploads the list of required documents.
