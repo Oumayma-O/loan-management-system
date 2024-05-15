@@ -8,7 +8,7 @@ export class CommercialServiceController {
   constructor(private readonly appService: AppService) {}
 
   @EventPattern('loan-application')
-  handleApplicationPlaced(@Payload() data: LoanApplicationFullDto) {
-    return this.appService.handleApplicationPlaced(data);
+  async handleApplicationPlaced(@Payload() data: LoanApplicationFullDto) {
+    return await this.appService.handleApplicationPlaced(data);
   }
 }

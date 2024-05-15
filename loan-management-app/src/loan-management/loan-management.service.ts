@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {DocumentDto, LoanApplicationDto} from './dto/loan-application.dto';
+import { DocumentDto, LoanApplicationDto } from './dto/loan-application.dto';
 import {
   ClientProxy,
   ClientProxyFactory,
