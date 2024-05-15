@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 import { Inject, Injectable } from '@nestjs/common';
 import { DocumentDto, LoanApplicationDto } from './dto/loan-application.dto';
 import { ClientKafka } from '@nestjs/microservices';
+=======
+import { Injectable } from '@nestjs/common';
+import { DocumentDto, LoanApplicationDto } from './dto/loan-application.dto';
+import {
+  ClientProxy,
+  ClientProxyFactory,
+  Transport,
+} from '@nestjs/microservices';
+>>>>>>> refs/remotes/origin/main
 
 @Injectable()
 export class LoanManagementService {

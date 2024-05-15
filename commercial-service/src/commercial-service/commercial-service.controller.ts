@@ -6,4 +6,11 @@ import { CommercialServiceService } from './commercial-service.service';
 @Controller('commercial-service')
 export class CommercialServiceController {
 
+<<<<<<< HEAD
+=======
+  @EventPattern('loan-application')
+  async handleApplicationPlaced(@Payload() data: LoanApplicationFullDto) {
+    return await this.appService.handleApplicationPlaced(data);
+  }
+>>>>>>> refs/remotes/origin/main
 }

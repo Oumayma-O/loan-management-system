@@ -18,6 +18,6 @@ async function bootstrap() {
     },
   );
   await app.listen();
-  console.log('Commercial-service module is running');
+  console.log('Commercial-service is running');
 }
 bootstrap();
